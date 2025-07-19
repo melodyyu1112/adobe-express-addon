@@ -12,8 +12,8 @@ const App = ({addOnUISdk, sandboxProxy}) => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    images.forEach((img, index) => {
-      const elementId = `img-${index}`;
+    images.forEach((img) => {
+      const elementId = `img-${img.id}`;
       const previewUrl = `${img.urls.thumb}&w=300`;
 
       const imageEl = document.getElementById(elementId);
@@ -28,7 +28,7 @@ const App = ({addOnUISdk, sandboxProxy}) => {
           },
         });
       } catch (err) {
-        console.error(`drag setup failed for image ${index}`, err);
+        console.error(`drag setup failed for image ${img.id}`, err);
       }
     });
   }, [images, addOnUISdk]);
@@ -99,10 +99,10 @@ const App = ({addOnUISdk, sandboxProxy}) => {
             justifyContent: "flex-start",
           }}
         >
-          {images.map((img, index) => (
+          {images.map((img) => (
             <img
-              id={`img-${index}`}
-              key={index}
+              id={`img-${img.id}`}
+              key={img.id}
               src={`${img.urls.thumb}&w=300`}
               alt={img.alt_description}
               style={{
