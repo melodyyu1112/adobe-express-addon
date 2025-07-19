@@ -1,5 +1,4 @@
 # 🎨 Moodboard Generator – Adobe Express Add-on  
-Created by Melody Yu
 
 
 ## ✨ Overview
