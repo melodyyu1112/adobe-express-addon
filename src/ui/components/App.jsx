@@ -7,7 +7,7 @@ import "./App.css";
 
 const UNSPLASH_ACCESS_KEY = "-uuQ6asuxb4pOy7UvmJS7yUZGDuu2nTZLEICWdTtaAg";
 
-const App = ({addOnUISdk}) => {
+const App = ({addOnUISdk, sandboxProxy}) => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
 
@@ -46,6 +46,13 @@ const App = ({addOnUISdk}) => {
     <Theme system="express" scale="medium" color="light">
       <div style={{padding: "1rem"}}>
         <h2>Moodboard Generator</h2>
+        <Button
+          style={{marginLeft: "1rem"}}
+          onClick={() => sandboxProxy.createText({text: "Moodboard Title"})}
+        >
+          Add Title Text
+        </Button>
+
         <input
           type="text"
           placeholder="Search Unsplash..."
