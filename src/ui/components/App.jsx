@@ -44,33 +44,83 @@ const App = ({addOnUISdk, sandboxProxy}) => {
 
   return (
     <Theme system="express" scale="medium" color="light">
-      <div style={{padding: "1rem"}}>
-        <h2>Moodboard Generator</h2>
-        <Button
-          style={{marginLeft: "1rem"}}
-          onClick={() => sandboxProxy.createText({text: "Moodboard Title"})}
+      <div
+        style={{
+          padding: "2rem",
+          maxWidth: 960,
+          margin: "0 auto",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
+        <h2 style={{marginBottom: "1.5rem", fontSize: "1.75rem"}}>
+          Moodboard Generator
+        </h2>
+        <div style={{marginBottom: "1.5rem"}}>
+          <Button
+            variant="primary"
+            onClick={() => sandboxProxy.createText({text: "Moodboard Title"})}
+          >
+            Add Title Text
+          </Button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            alignItems: "center",
+            marginBottom: "1rem",
+          }}
         >
-          Add Title Text
-        </Button>
+          <input
+            type="text"
+            placeholder="Search Unsplash..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            style={{
+              flexGrow: 1,
+              padding: "0.5rem 1rem",
+              fontSize: "1rem",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
 
-        <input
-          type="text"
-          placeholder="Search Unsplash..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          style={{marginRight: 8, padding: "0.5rem"}}
-        />
-        <Button onClick={searchImages}>Search</Button>
+          <Button variant="secondary" onClick={searchImages}>
+            Search
+          </Button>
+        </div>
 
-        <div style={{display: "flex", flexWrap: "wrap", marginTop: "1rem"}}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.75rem",
+            marginTop: "1.5rem",
+            justifyContent: "flex-start",
+          }}
+        >
           {images.map((img, index) => (
             <img
               id={`img-${index}`}
               key={index}
               src={`${img.urls.thumb}&w=300`}
               alt={img.alt_description}
-              style={{width: 100, margin: 5, cursor: "grab"}}
+              style={{
+                width: 100,
+                height: 100,
+                objectFit: "cover",
+                borderRadius: "6px",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                cursor: "grab",
+                transition: "transform 0.2s ease",
+              }}
               draggable={true}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.transform = "scale(1.0)")
+              }
             />
           ))}
         </div>
