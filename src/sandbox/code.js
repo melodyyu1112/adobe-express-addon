@@ -36,6 +36,30 @@ function start() {
       image.height = 300;
       editor.context.insertionParent.children.append(image);
     },
+    createText: async ({text}) => {
+      const insertionParent = editor.context.insertionParent;
+      const content = text || "Hellooo";
+      const textNode = editor.createText(content);
+
+      textNode.setPositionInParent(
+        {x: insertionParent.width / 2, y: insertionParent.height / 2},
+        {x: 0, y: 0}
+      );
+
+      insertionParent.children.append(textNode);
+      textNode.fullContent.applyCharacterStyles(
+        {
+          fontSize: 16,
+          color: {red: 0, green: 0, blue: 0, alpha: 1},
+          underline: false,
+          letterSpacing: 2,
+        },
+        {
+          start: 0,
+          length: content.length,
+        }
+      );
+    },
   };
 
   // Expose `sandboxApi` to the UI runtime.
